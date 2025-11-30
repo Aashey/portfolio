@@ -10,7 +10,7 @@ export const projects =[
     },
     {
       id: "pharmacy",
-      name: "HMIS (Pharmacy)",
+      name: "Pharmacy Module",
       rpgName: "Alchemy",
       desc: "Executed structured and exploratory testing of property suggestion chatbot’s conversational logic, including edge case handling and adversarial prompt evaluation.",
       rpgDesc: "Focused on verification of the Pharmacy Module, ensuring dispensing logic and stock calculations were correct using a combination of manual and early automation scripts.",
@@ -19,7 +19,7 @@ export const projects =[
     },
     {
       id: "accounts",
-      name: "HMIS (Account)",
+      name: "Account Module",
       rpgName: "Treasury",
       desc: "Automated test scripts for account voucher entries, ensuring smooth and accurate financial processes.",
       rpgDesc: "Guarded the Royal Treasury by developing and automating scripts for financial account voucher entries, guaranteeing accurate financial process execution.",
