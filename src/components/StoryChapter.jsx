@@ -53,7 +53,7 @@ export const StoryChapter = ({ data, index, onProjectClick }) => {
                 <button
                   key={i}
                   onClick={() => onProjectClick(p)}
-                  className="flex items-center gap-2 px-4 py-2 border-2 border-gray-200 text-gray-600 hover:border-gray-900 hover:text-gray-900 rounded-full transition-colors group"
+                  className="flex cursor-pointer items-center gap-2 px-4 py-2 border-2 border-gray-200 text-gray-600 hover:border-gray-900 hover:text-gray-900 rounded-full transition-colors group"
                 >
                   <Map size={16} />
                   <span className="font-bold text-sm">{p}</span>

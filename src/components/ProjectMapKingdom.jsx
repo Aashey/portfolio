@@ -14,7 +14,7 @@ export const ProjectMapKingdom = ({ activeProjectId, onSelectProject, refProp, h
           <p className="text-gray-600 mt-4 italic">"Click a kingdom on the map to reveal its tale of conquest and glory. Detailed accounts of battles fought, strategies executed, and tools wielded await you here."</p>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-0 border-4 border-gray-900 shadow-2xl bg-white">
+        <div className="flex flex-col lg:flex-row gap-0 border-4 border-black shadow-2xl bg-white">
           {/* Left Panel: Ink Map */}
           <div className="lg:w-1/2 h-[500px] relative bg-[#f8f8f8] overflow-hidden bg-[url('https://www.transparenttextures.com/patterns/graphy.png')] border-b-4 lg:border-b-0 lg:border-r-4 border-gray-900">
             <div className="absolute top-6 left-6 font-serif font-bold text-gray-400 uppercase tracking-widest text-sm">Strategic Operations Map</div>
@@ -43,7 +43,7 @@ export const ProjectMapKingdom = ({ activeProjectId, onSelectProject, refProp, h
           </div>
 
           {/* Right Panel: Scroll Description */}
-          <div className="lg:w-1/2 h-[500px] p-12 lg:p-16 flex flex-col justify-center bg-white">
+          <div className="lg:w-1/2 h-[500px] p-12 lg:p-16 flex flex-col justify-center bg-gray-50">
             {activeProject ? (
               <div className="animate-fadeIn space-y-6">
                 <div>
@@ -56,7 +56,7 @@ export const ProjectMapKingdom = ({ activeProjectId, onSelectProject, refProp, h
                 </p>
 
                 <div className="pt-6">
-                  <h4 className="font-bold text-gray-400 text-xs uppercase tracking-widest mb-3 flex items-center gap-2"><Beaker size={14} /> Tools of the Trade</h4>
+                  <h4 className="font-bold text-gray-600 text-xs uppercase tracking-widest mb-3 flex items-center gap-2"><Beaker size={14} /> Tools of the Trade</h4>
                   <div className="flex flex-wrap gap-2">
                     {activeProject.tech.map(t => (
                       <span key={t} className="px-3 py-1 border border-gray-300 text-gray-600 text-xs font-bold rounded-full">{t}</span>
