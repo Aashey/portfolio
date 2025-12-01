@@ -24,24 +24,24 @@ export const RPGMode = ({ heroData: HERO_DATA }) => {
     const start = document.getElementById('journey-start');
     start?.scrollIntoView({ behavior: 'smooth' });
   }
-
+  const base = '/portfolio';
   const sounds = [
-    "public/sounds/aboutme.mp3",
-    "public/sounds/education.mp3",
-    "public/sounds/course.mp3",
-    "public/sounds/intern.mp3",
-    "public/sounds/trainee.mp3",
-    "public/sounds/associate.mp3",
-    "public/sounds/technicalskills.mp3",
-    "public/sounds/projects.mp3",
-    "public/sounds/hobbies.mp3"
+    `${base}/sounds/aboutme.mp3`,
+    `${base}/sounds/education.mp3`,
+    `${base}/sounds/course.mp3`,
+    `${base}/sounds/intern.mp3`,
+    `${base}/sounds/trainee.mp3`,
+    `${base}/sounds/associate.mp3`,
+    `${base}/sounds/technicalskills.mp3`,
+    `${base}/sounds/projects.mp3`,
+    `${base}/sounds/hobbies.mp3`,
   ];
 
   const setRef = (el) => {
-  if (el && !refs.current.includes(el)) {
-    refs.current.push(el);
-  }
-};
+    if (el && !refs.current.includes(el)) {
+      refs.current.push(el);
+    }
+  };
 
   useEffect(() => {
     const players = sounds.map((s) => new Audio(s));
@@ -115,7 +115,7 @@ export const RPGMode = ({ heroData: HERO_DATA }) => {
         <div id="journey-start" className="pt-20">
           {[...HERO_DATA.education, ...HERO_DATA.experience].map((item, index) => (
             <StoryChapter
-            ref={setRef}
+              ref={setRef}
               key={item.id}
               data={item}
               index={index}
@@ -143,7 +143,7 @@ export const RPGMode = ({ heroData: HERO_DATA }) => {
         </section>
 
         <ProjectMapKingdom
-        ref={setRef}
+          ref={setRef}
           activeProjectId={activeProjectId}
           onSelectProject={setActiveProjectId}
           refProp={projectRef}
