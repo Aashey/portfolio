@@ -43,40 +43,42 @@ export const RPGMode = ({ heroData: HERO_DATA }) => {
   }
 };
 
-  useEffect(() => {
-    const players = sounds.map((s) => new Audio(s));
+ useEffect(() => {
+  let currentPlaying = null;
+  const playedOnce = new Array(sounds.length).fill(false);
 
-    let currentPlaying = null;
-    const playedOnce = new Array(sounds.length).fill(false);
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
+        const index = refs.current.indexOf(entry.target);
+        if (index === -1 || playedOnce[index]) return;
 
-          const index = refs.current.indexOf(entry.target);
-          if (index === -1) return;
+        // Stop previous
+        if (currentPlaying !== null && currentPlaying !== index) {
+          currentPlaying.audio.pause();
+          currentPlaying.audio.currentTime = 0;
+        }
 
-          if (playedOnce[index]) return;
-
-          if (currentPlaying !== null && currentPlaying !== index) {
-            players[currentPlaying].pause();
-            players[currentPlaying].currentTime = 0;
-          }
-
-          players[index].play();
-          currentPlaying = index;
-
-          playedOnce[index] = true;
+        // Create audio only now
+        const audio = new Audio(sounds[index]);
+        audio.play().catch(() => {
+          console.log("User must interact first to allow audio");
         });
-      },
-      { threshold: 0.5 }
-    );
 
-    refs.current.forEach((el) => observer.observe(el));
+        currentPlaying = { index, audio };
+        playedOnce[index] = true;
+      });
+    },
+    { threshold: 0.5 }
+  );
 
-    return () => observer.disconnect();
-  }, []);
+  refs.current.forEach((el) => observer.observe(el));
+
+  return () => observer.disconnect();
+}, []);
+
 
 
   return (
