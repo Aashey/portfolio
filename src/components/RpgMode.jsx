@@ -26,7 +26,7 @@ export const RPGMode = ({ heroData: HERO_DATA }) => {
   }
 
   const sounds = [
-    "sounds/aboutme.mp3",
+    "portfolio/sounds/aboutme.mp3",
     "sounds/education.mp3",
     "sounds/course.mp3",
     "sounds/intern.mp3",
