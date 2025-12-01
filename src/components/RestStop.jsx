@@ -1,7 +1,7 @@
 import { Flame } from "lucide-react";
 
-export const RestStop = ({heroData:HERO_DATA}) => (
-  <section className="py-32 bg-gray-50 border-t border-gray-200">
+export const RestStop = ({heroData:HERO_DATA,ref}) => (
+  <section ref={ref} className="py-32 bg-gray-50 border-t border-gray-200">
     <div className="max-w-4xl mx-auto px-6 text-center">
       <div className="mb-12">
         <div className="text-center mb-16">

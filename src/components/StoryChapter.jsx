@@ -1,7 +1,7 @@
 import { Map, Scroll, Sword } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-export const StoryChapter = ({ data, index, onProjectClick }) => {
+export const StoryChapter = ({ data, index, onProjectClick,ref }) => {
   const [isVisible, setIsVisible] = useState(false);
   const domRef = useRef();
 
@@ -36,7 +36,7 @@ export const StoryChapter = ({ data, index, onProjectClick }) => {
         </div>
 
         {/* Narrative Content */}
-        <div className={`order-2 ${isLeft ? 'md:order-2 text-left' : 'md:order-1 md:text-right'} space-y-6`}>
+        <div ref={ref} className={`order-2 ${isLeft ? 'md:order-2 text-left' : 'md:order-1 md:text-right'} space-y-6`}>
           <div>
             <span className="text-sm font-bold text-gray-400 uppercase tracking-widest">{data.date} • {data.rpgTitle}</span>
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mt-2 leading-tight">{data.rpgRole}</h2>

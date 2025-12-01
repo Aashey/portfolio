@@ -1,13 +1,15 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ProjectMapKingdom } from "./ProjectMapKingdom";
 import { RestStop } from "./RestStop";
 import { ArrowDown, Pocket } from "lucide-react";
 import { StoryChapter } from "./StoryChapter";
 import { RPGItem } from "./RpgItem";
 
-export const RPGMode = ({heroData:HERO_DATA}) => {
+export const RPGMode = ({ heroData: HERO_DATA }) => {
   const [activeProjectId, setActiveProjectId] = useState("hmis");
   const projectRef = useRef(null);
+  const refs = useRef([]);
+  refs.current = [];
 
   const handleProjectClick = (projectName) => {
     // Find the project ID by its name (e.g., "Second Look Health")
@@ -23,11 +25,65 @@ export const RPGMode = ({heroData:HERO_DATA}) => {
     start?.scrollIntoView({ behavior: 'smooth' });
   }
 
+  const sounds = [
+    "public/sounds/aboutme.mp3",
+    "public/sounds/education.mp3",
+    "public/sounds/course.mp3",
+    "public/sounds/intern.mp3",
+    "public/sounds/trainee.mp3",
+    "public/sounds/associate.mp3",
+    "public/sounds/technicalskills.mp3",
+    "public/sounds/projects.mp3",
+    "public/sounds/hobbies.mp3"
+  ];
+
+  const setRef = (el) => {
+  if (el && !refs.current.includes(el)) {
+    refs.current.push(el);
+  }
+};
+
+  useEffect(() => {
+    const players = sounds.map((s) => new Audio(s));
+
+    let currentPlaying = null;
+    const playedOnce = new Array(sounds.length).fill(false);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          const index = refs.current.indexOf(entry.target);
+          if (index === -1) return;
+
+          if (playedOnce[index]) return;
+
+          if (currentPlaying !== null && currentPlaying !== index) {
+            players[currentPlaying].pause();
+            players[currentPlaying].currentTime = 0;
+          }
+
+          players[index].play();
+          currentPlaying = index;
+
+          playedOnce[index] = true;
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    refs.current.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+
   return (
     <div className="bg-white text-gray-900 font-sans selection:bg-gray-200">
 
       {/* 1. Full Screen Hero Section */}
-      <header className="min-h-screen bg-gray-50 flex flex-col justify-center items-center px-6 relative border-b-0 border-gray-100">
+      <header ref={setRef} className="min-h-screen bg-gray-50 flex flex-col justify-center items-center px-6 relative border-b-0 border-gray-100">
         <div className="max-w-4xl mx-auto text-center z-10 space-y-8">
           <div className="inline-block border-b-2 border-gray-900 pb-2">
             <p className="text-gray-400 font-extrabold text-xl font-serif tracking-[0.2em] uppercase">The Chronicle Of</p>
@@ -59,6 +115,7 @@ export const RPGMode = ({heroData:HERO_DATA}) => {
         <div id="journey-start" className="pt-20">
           {[...HERO_DATA.education, ...HERO_DATA.experience].map((item, index) => (
             <StoryChapter
+            ref={setRef}
               key={item.id}
               data={item}
               index={index}
@@ -67,14 +124,14 @@ export const RPGMode = ({heroData:HERO_DATA}) => {
           ))}
         </div>
 
-        <section className="min-h-[60vh] flex flex-col justify-center py-24 bg-gray-50 relative z-10">
+        <section ref={setRef} className="min-h-[60vh] flex flex-col justify-center py-24 bg-gray-50 relative z-10">
           <div className="max-w-6xl mx-auto px-6 w-full">
             <div className="text-center mb-16">
               <Pocket className="mx-auto text-gray-900 mb-4" size={40} />
               <h2 className="text-4xl font-serif font-bold text-gray-900 mb-4">The Ranger's Arsenal</h2>
               <div className="h-1 w-20 bg-gray-900 mx-auto"></div>
               <p className="mt-4 italic text-gray-600">"Over years of campaigns, I have collected these tools, scrolls, and weapons — each honed through battle, each a companion in the trials I faced.{" "}
-    With them, I uncover weaknesses, strike with precision, and guard the realms I protect."</p>
+                With them, I uncover weaknesses, strike with precision, and guard the realms I protect."</p>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
@@ -86,13 +143,14 @@ export const RPGMode = ({heroData:HERO_DATA}) => {
         </section>
 
         <ProjectMapKingdom
+        ref={setRef}
           activeProjectId={activeProjectId}
           onSelectProject={setActiveProjectId}
           refProp={projectRef}
           heroData={HERO_DATA}
         />
 
-        <RestStop heroData={HERO_DATA} />
+        <RestStop ref={setRef} heroData={HERO_DATA} />
 
         <footer className="py-12 text-center text-gray-400 text-sm font-serif border-t border-gray-100">
           <p>End of Chronicle.</p>

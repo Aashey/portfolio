@@ -1,11 +1,11 @@
 import { Beaker, Compass, Shield } from "lucide-react";
 
-export const ProjectMapKingdom = ({ activeProjectId, onSelectProject, refProp, heroData:HERO_DATA }) => {
+export const ProjectMapKingdom = ({ activeProjectId, onSelectProject, refProp, heroData:HERO_DATA,ref }) => {
   const activeProject = HERO_DATA.projectDetails.find(p => p.id === activeProjectId) || HERO_DATA.projectDetails[0];
 
   return (
     <section ref={refProp} className="min-h-screen py-20 px-4 bg-white flex items-center justify-center">
-      <div className="max-w-6xl w-full">
+      <div ref={ref} className="max-w-6xl w-full">
         <div className="text-center mb-16">
           <Compass className="mx-auto text-gray-900 mb-4" size={40} />
           <h2 className="text-4xl font-serif font-bold text-gray-900 mb-4">Kingdoms of the Realm</h2>
