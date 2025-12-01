@@ -26,15 +26,15 @@ export const RPGMode = ({ heroData: HERO_DATA }) => {
   }
 
   const sounds = [
-    "public/sounds/aboutme.mp3",
-    "public/sounds/education.mp3",
-    "public/sounds/course.mp3",
-    "public/sounds/intern.mp3",
-    "public/sounds/trainee.mp3",
-    "public/sounds/associate.mp3",
-    "public/sounds/technicalskills.mp3",
-    "public/sounds/projects.mp3",
-    "public/sounds/hobbies.mp3"
+    "sounds/aboutme.mp3",
+    "sounds/education.mp3",
+    "sounds/course.mp3",
+    "sounds/intern.mp3",
+    "sounds/trainee.mp3",
+    "sounds/associate.mp3",
+    "sounds/technicalskills.mp3",
+    "sounds/projects.mp3",
+    "sounds/hobbies.mp3"
   ];
 
   const setRef = (el) => {
